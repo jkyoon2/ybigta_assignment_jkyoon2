@@ -1,0 +1,20 @@
+
+이름 : 정경윤 
+소속 : YBIGTA 23기
+목적 : 0711 SQL Query 과제 
+
+1. 
+SELECT C.CustomerID, C.CustomerName, SUM(OD.Quantity * P.Price) as TotalPurchased
+FROM Customers as C
+JOIN Orders as O ON C.CustomerID = O.CustomerID
+JOIN [OrderDetails] as OD ON O.OrderID = OD.OrderID
+JOIN Products as P ON OD.ProductID = P.ProductID
+GROUP BY C.CustomerID;
+
+2. 
+SELECT C.CategoryName, SUM(OD.Quantity) AS TotalSoldQuantity, SUM(OD.Quantity * P.Price) AS TotalSoldPrice
+FROM Products as P
+JOIN Categories as C ON P.CategoryID = C.CategoryID
+JOIN [OrderDetails] as OD ON P.ProductID = OD.ProductID
+GROUP BY C.CategoryName
+HAVING SUM(OD.Quantity) > 2000;
